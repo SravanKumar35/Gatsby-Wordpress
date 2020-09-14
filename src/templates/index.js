@@ -42,6 +42,7 @@ export default ({ data, pageContext }) => (
               </Grid>
             </Box>
           </Link>
+          <hr/>
         </Box>
       ))}
     </Stack>

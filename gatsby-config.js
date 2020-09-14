@@ -20,9 +20,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url:
-          process.env.WPGRAPHQL_URL ||
-          `https://dev-gatsby-source-wordpress-v4.pantheonsite.io/graphql`,
+        url: process.env.WPGRAPHQL_URL || `http://cumulations.local/graphql`,
         verbose: true,
         develop: {
           hardCacheMediaFiles: true,
@@ -55,5 +53,44 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify-cache`,
+    {
+      resolve: "@pasdo501/gatsby-source-woocommerce",
+      options: {
+        // Base URL of Wordpress site
+        api: "cumulations.local",
+
+        // set to false to not see verbose output during build
+        // default: true
+        verbose: true,
+
+        // true if using https. otherwise false.
+        https: true,
+        api_keys: {
+          consumer_key: 'asra2528',
+          consumer_secret: 'qwerty1234%',
+        },
+        // Array of strings with fields you'd like to create nodes for...
+        fields: ["products", "products/categories", "products/attributes"],
+        // Send the API keys as query string parameters instead of using the authorization header
+        // OPTIONAL: defaults to false
+        query_string_auth: false,
+        // Version of the woocommerce API to use
+        // OPTIONAL: defaults to 'wc/v3'
+        api_version: "wc/v2",
+        // OPTIONAL: How many results to retrieve *per request*
+        per_page: 100,
+        // OPTIONAL: Custom WP REST API url prefix, only needed if not using
+        // the default wp-json prefix.
+        wpAPIPrefix: "wp-json",
+        // OPTIONAL: Support for URLs with ports, e.g. 8080; defaults to no port
+        port: "8080",
+        // OPTIONAL: Encoding; default to 'utf8'
+        encoding: "utf8",
+        // OPTIONAL: Custom Axios config (see https://github.com/axios/axios) - note that this can override other options.
+        axios_config: {
+          // Axios config options
+        },
+      },
+    },
   ],
 }
